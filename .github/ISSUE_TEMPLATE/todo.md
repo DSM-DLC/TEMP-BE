@@ -1,0 +1,21 @@
+---
+name: Todo
+about: 작업 사항을 입력해 주세요.
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+## Description
+설명을 작성하세요.
+
+<br/>
+
+## TODO
+- [ ] todo
+- [ ] todo 
+
+<br/>
+
+## ETC
