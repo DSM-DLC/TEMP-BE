@@ -4,8 +4,7 @@ import com.example.tempbe.domain.category.domain.Category;
 import com.example.tempbe.domain.category.domain.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
@@ -13,6 +12,7 @@ import java.util.List;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
+    @Transactional
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
