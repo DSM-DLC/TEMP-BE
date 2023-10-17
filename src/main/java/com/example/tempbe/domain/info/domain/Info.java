@@ -2,6 +2,7 @@ package com.example.tempbe.domain.info.domain;
 
 import com.example.tempbe.global.entity.BaseIdEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Column;
@@ -48,6 +49,7 @@ public class Info extends BaseIdEntity {
     @Column(nullable = false, length = 20)
     private String picContact;
 
+    @Builder
     public Info(String name, String birthDate, String address, String budgetBasis, Long cost, Long workHour, Boolean fourInsurance,
                 String jobType, String period, String issuanceDepartment, String picName, String picContact){
         this.name = name;
