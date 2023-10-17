@@ -15,7 +15,7 @@ public class Admin extends BaseIdEntity{
     @Column(nullable = false, length = 30)
     private String adminId;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 300)
     private String password;
 
     @Column(nullable = false, length = 10)
