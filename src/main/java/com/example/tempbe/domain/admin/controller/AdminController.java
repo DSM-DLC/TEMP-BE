@@ -1,6 +1,8 @@
 package com.example.tempbe.domain.admin.controller;
 
 import com.example.tempbe.domain.admin.controller.request.AdminLoginRequest;
+import com.example.tempbe.domain.admin.controller.request.IssueRequest;
+import com.example.tempbe.domain.admin.service.AdminIssueService;
 import com.example.tempbe.domain.admin.service.AdminLoginService;
 import com.example.tempbe.domain.admin.service.AdminRefreshService;
 import com.example.tempbe.domain.auth.controller.response.TokenResponse;
@@ -23,6 +25,7 @@ import javax.validation.constraints.NotBlank;
 public class AdminController {
     private final AdminLoginService adminLoginService;
     private final AdminRefreshService adminRefreshService;
+    private final AdminIssueService adminIssueService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/login")
@@ -33,5 +36,11 @@ public class AdminController {
     @PutMapping("/refresh")
     public TokenResponse refreshToken(@RequestHeader("refresh-token") @NotBlank(message = "입력해주세요.") String refreshToken) {
         return adminRefreshService.execute(refreshToken);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/issue")
+    public void issue(@RequestBody @Valid IssueRequest request){
+        adminIssueService.execute(request);
     }
 }
