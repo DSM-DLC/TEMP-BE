@@ -65,4 +65,20 @@ public class Info extends BaseIdEntity {
         this.picName = picName;
         this.picContact = picContact;
     }
+
+    public void updateInfo(String name, String birthDate, String address, String budgetBasis, Long cost, Long workHour, Boolean fourInsurance,
+                           String jobType, String period, String issuanceDepartment, String picName, String picContact){
+        this.name = name;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.budgetBasis = budgetBasis;
+        this.cost = cost;
+        this.workHour = workHour;
+        this.fourInsurance = fourInsurance;
+        this.jobType = jobType;
+        this.period = period;
+        this.issuanceDepartment = issuanceDepartment;
+        this.picName = picName;
+        this.picContact = picContact;
+    }
 }
