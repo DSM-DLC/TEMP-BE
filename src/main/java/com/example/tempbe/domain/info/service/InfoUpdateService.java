@@ -15,7 +15,7 @@ public class InfoUpdateService {
 
     @Transactional
     public void excute(InfoUpdateRequest request){
-        Info info = infoRepository.findById(request.getId())
+        Info info = infoRepository.findByNameAndBirthDate(request.getName(), request.getBirthDate())
                 .orElseThrow(()-> InfoNotFoundException.EXCEPTION);
 
         info.updateInfo(request.getName(),
