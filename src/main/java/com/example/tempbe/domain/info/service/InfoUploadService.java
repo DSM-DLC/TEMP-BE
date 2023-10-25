@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class InfoUploadService {
     private final InfoRepository infoRepository;
-    private final UserRepository userRepository;
 
     @Transactional
     public void execute(InfoUploadRequest request){
