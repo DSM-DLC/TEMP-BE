@@ -9,8 +9,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 public class InfoUpdateRequest {
-    private UUID id;
-
     @NotNull(message = "성명을 입력해주세요")
     private String name;
 
