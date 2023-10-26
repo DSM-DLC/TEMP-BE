@@ -25,6 +25,6 @@ public class InfoController {
     
     @PutMapping("/update")
     public void update(@RequestBody @Valid InfoUpdateRequest request){
-        infoUpdateService.excute(request);
+        infoUpdateService.execute(request);
     }
 }
