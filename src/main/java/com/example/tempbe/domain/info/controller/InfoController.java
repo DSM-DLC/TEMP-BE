@@ -22,8 +22,8 @@ public class InfoController {
     public void upload(@RequestBody @Valid InfoUploadRequest request){
         infoUploadService.execute(request);
     }
-    
-    @PutMapping("/update")
+
+    @PatchMapping("/update")
     public void update(@RequestBody @Valid InfoUpdateRequest request){
         infoUpdateService.execute(request);
     }
