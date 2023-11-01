@@ -22,6 +22,7 @@ public class InfoDetailService {
                 .orElseThrow(()-> InfoNotFoundException.EXCEPTION);
 
         return InfoDetailResponse.builder()
+                .id(info.getId())
                 .name(info.getName())
                 .birthDate(info.getBirthDate())
                 .address(info.getAddress())
