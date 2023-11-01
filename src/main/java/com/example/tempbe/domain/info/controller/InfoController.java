@@ -1,9 +1,12 @@
 package com.example.tempbe.domain.info.controller;
 
+import com.example.tempbe.domain.info.controller.request.InfoDetailRequest;
 import com.example.tempbe.domain.info.controller.request.InfoFindRequest;
 import com.example.tempbe.domain.info.controller.request.InfoUpdateRequest;
 import com.example.tempbe.domain.info.controller.request.InfoUploadRequest;
+import com.example.tempbe.domain.info.controller.response.InfoDetailResponse;
 import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
+import com.example.tempbe.domain.info.service.InfoDetailService;
 import com.example.tempbe.domain.info.service.InfoUpdateService;
 import com.example.tempbe.domain.info.service.InfoUploadService;
 import com.example.tempbe.domain.info.service.InfoFindService;
@@ -20,6 +23,7 @@ public class InfoController {
     private final InfoUploadService infoUploadService;
     private final InfoUpdateService infoUpdateService;
     private final InfoFindService infoFindService;
+    private final InfoDetailService infoDetailService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/upload")
@@ -35,5 +39,10 @@ public class InfoController {
     @GetMapping("/find")
     public InfoFindResponse find(@RequestBody @Valid InfoFindRequest request){
         return infoFindService.execute(request);
+    }
+
+    @GetMapping("/detail")
+    public InfoDetailResponse find(@RequestBody @Valid InfoDetailRequest request){
+        return infoDetailService.execute(request);
     }
 }
