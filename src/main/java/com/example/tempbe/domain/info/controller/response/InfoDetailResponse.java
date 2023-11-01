@@ -3,11 +3,13 @@ package com.example.tempbe.domain.info.controller.response;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 @Builder
 public class InfoDetailResponse {
+    private final UUID id;
+
     private final String name;
 
     private final String birthDate;
