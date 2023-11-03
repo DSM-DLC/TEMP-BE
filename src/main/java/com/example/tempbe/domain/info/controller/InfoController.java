@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/info")
@@ -37,7 +38,7 @@ public class InfoController {
     }
 
     @GetMapping("/find")
-    public InfoFindResponse find(@RequestBody @Valid InfoFindRequest request){
+    public List<InfoFindResponse> find(@RequestBody @Valid InfoFindRequest request){
         return infoFindService.execute(request);
     }
 
