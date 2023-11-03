@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @NoArgsConstructor
 @Getter
@@ -12,7 +13,7 @@ public class InfoDetailRequest {
     private String name;
 
     @NotNull
-    private String birthDate;
+    private Date birthDate;
 
     @NotNull
     private String address;
