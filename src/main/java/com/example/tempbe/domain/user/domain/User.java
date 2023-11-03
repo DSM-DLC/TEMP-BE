@@ -39,4 +39,12 @@ public class User extends BaseIdEntity {
         this.contact = contact;
         this.role = role;
     }
+
+
+    public void updateUserProfile(String userId, String name, String department, String contact){
+        this.userId = userId;
+        this.name = name;
+        this.department = department;
+        this.contact = contact;
+    }
 }
