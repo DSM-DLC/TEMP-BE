@@ -2,9 +2,11 @@ package com.example.tempbe.domain.user.controller;
 
 import com.example.tempbe.domain.auth.controller.response.TokenResponse;
 import com.example.tempbe.domain.user.controller.request.UserLoginRequest;
+import com.example.tempbe.domain.user.controller.request.UserProfileUpdateRequest;
 import com.example.tempbe.domain.user.controller.response.UserProfileResponse;
 import com.example.tempbe.domain.user.service.UserLoginService;
 import com.example.tempbe.domain.user.service.UserProfileService;
+import com.example.tempbe.domain.user.service.UserProfileUpdateService;
 import com.example.tempbe.domain.user.service.UserRefreshService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ public class UserController {
     private final UserLoginService userLoginService;
     private final UserRefreshService userRefreshService;
     private final UserProfileService userProfileService;
+    private final UserProfileUpdateService userProfileUpdateService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/login")
@@ -35,5 +38,10 @@ public class UserController {
     @GetMapping("/profile")
     public UserProfileResponse profile(){
         return userProfileService.execute();
+    }
+
+    @PatchMapping("/profile/update")
+    public void profileUpdate(@RequestBody @Valid UserProfileUpdateRequest request){
+        userProfileUpdateService.execute(request);
     }
 }
