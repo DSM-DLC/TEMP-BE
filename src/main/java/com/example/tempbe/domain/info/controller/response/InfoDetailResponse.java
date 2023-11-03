@@ -3,6 +3,7 @@ package com.example.tempbe.domain.info.controller.response;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -12,7 +13,7 @@ public class InfoDetailResponse {
 
     private final String name;
 
-    private final String birthDate;
+    private final Date birthDate;
 
     private final String address;
 
