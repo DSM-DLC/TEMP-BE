@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AdminProfileService {
     private final AdminRepository adminRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public AdminProfileResponse execute(){
