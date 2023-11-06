@@ -1,9 +1,6 @@
 package com.example.tempbe.domain.info.controller;
 
-import com.example.tempbe.domain.info.controller.request.InfoDetailRequest;
-import com.example.tempbe.domain.info.controller.request.InfoFindRequest;
-import com.example.tempbe.domain.info.controller.request.InfoUpdateRequest;
-import com.example.tempbe.domain.info.controller.request.InfoUploadRequest;
+import com.example.tempbe.domain.info.controller.request.*;
 import com.example.tempbe.domain.info.controller.response.InfoDetailResponse;
 import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
 import com.example.tempbe.domain.info.controller.response.InfoPagingResponse;
@@ -26,6 +23,7 @@ public class InfoController {
     private final InfoFindService infoFindService;
     private final InfoDetailService infoDetailService;
     private final InfoPagingService infoPagingService;
+    private final InfoDeleteService infoDeleteService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/upload")
@@ -52,4 +50,10 @@ public class InfoController {
     public List<InfoPagingResponse> find(Pageable pageable){
         return infoPagingService.findAll(pageable).getContent();
     }
+
+    @DeleteMapping("/delete")
+    public void delete(@RequestBody @Valid InfoDeleteRequest request){
+        infoDeleteService.execute(request);
+    }
+
 }
