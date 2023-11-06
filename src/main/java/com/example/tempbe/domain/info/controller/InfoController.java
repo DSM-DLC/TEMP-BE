@@ -6,11 +6,11 @@ import com.example.tempbe.domain.info.controller.request.InfoUpdateRequest;
 import com.example.tempbe.domain.info.controller.request.InfoUploadRequest;
 import com.example.tempbe.domain.info.controller.response.InfoDetailResponse;
 import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
-import com.example.tempbe.domain.info.service.InfoDetailService;
-import com.example.tempbe.domain.info.service.InfoUpdateService;
-import com.example.tempbe.domain.info.service.InfoUploadService;
-import com.example.tempbe.domain.info.service.InfoFindService;
+import com.example.tempbe.domain.info.controller.response.InfoPagingResponse;
+import com.example.tempbe.domain.info.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +25,7 @@ public class InfoController {
     private final InfoUpdateService infoUpdateService;
     private final InfoFindService infoFindService;
     private final InfoDetailService infoDetailService;
+    private final InfoPagingService infoPagingService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/upload")
@@ -45,5 +46,10 @@ public class InfoController {
     @GetMapping("/detail")
     public InfoDetailResponse find(@RequestBody @Valid InfoDetailRequest request){
         return infoDetailService.execute(request);
+    }
+
+    @GetMapping("/list")
+    public List<InfoPagingResponse> find(Pageable pageable){
+        return infoPagingService.findAll(pageable).getContent();
     }
 }
