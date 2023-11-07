@@ -33,12 +33,12 @@ public class AdminLoginService {
         }
 
         String accessToken = jwtTokenProvider.createAccessToken(admin.getAdminId(), admin.getRole());
+        String refreshToken = jwtTokenProvider.createRefreshToken(admin.getAdminId(), admin.getRole());
 
         return TokenResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshRepository.save(
-                        new RefreshToken(jwtTokenProvider.createRefreshToken())).getToken())
-                .role(admin.getRole())
+                        new RefreshToken(refreshToken)).getToken())
                 .build();
     }
 }
