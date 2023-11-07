@@ -27,4 +27,8 @@ public class Admin extends BaseIdEntity{
         this.password = password;
         this.role = role;
     }
+
+    public void AdminChangePassword(String password){
+        this.password = password;
+    }
 }
