@@ -51,13 +51,14 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String createRefreshToken() {
-
+    public String createRefreshToken(String id, String role) {
         return Jwts.builder()
+                .setSubject(id)
+                .setHeaderParam("typ", "refresh")
+                .claim("role", role)
+                .signWith(SignatureAlgorithm.HS256, secret)
                 .setExpiration(new Date(System.currentTimeMillis() + refreshExp * 1000))
                 .setIssuedAt(new Date())
-                .setHeaderParam("typ", "refresh")
-                .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
 
@@ -67,6 +68,10 @@ public class JwtTokenProvider {
 
     public String getRole(String token) {
         return getJws(token).getBody().get("role").toString();
+    }
+
+    public String getId(String token) {
+        return getJws(token).getBody().getSubject();
     }
 
     private Jws<Claims> getJws(String token){
@@ -102,5 +107,14 @@ public class JwtTokenProvider {
         else {
             return adminDetailsService.loadUserByUsername(body.getSubject());
         }
+    }
+
+    public Long getExpiration(String accessToken) {
+
+        Date expiration = Jwts.parserBuilder().setSigningKey(secret)
+                .build().parseClaimsJws(accessToken).getBody().getExpiration();
+
+        long now = new Date().getTime();
+        return expiration.getTime() - now;
     }
 }

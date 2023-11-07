@@ -7,20 +7,23 @@ import com.example.tempbe.domain.user.controller.response.UserProfileResponse;
 import com.example.tempbe.domain.user.service.UserLoginService;
 import com.example.tempbe.domain.user.service.UserProfileService;
 import com.example.tempbe.domain.user.service.UserProfileUpdateService;
-import com.example.tempbe.domain.user.service.UserRefreshService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 @RequiredArgsConstructor
 @RequestMapping("/user")
 @RestController
 public class UserController {
     private final UserLoginService userLoginService;
-    private final UserRefreshService userRefreshService;
     private final UserProfileService userProfileService;
     private final UserProfileUpdateService userProfileUpdateService;
 
@@ -28,11 +31,6 @@ public class UserController {
     @PostMapping("/login")
     public TokenResponse login(@RequestBody @Valid UserLoginRequest userLoginRequest){
         return userLoginService.execute(userLoginRequest);
-    }
-
-    @PutMapping("/refresh")
-    public TokenResponse refreshToken(@RequestHeader("refresh-token") @NotBlank(message = "입력해주세요.") String refreshToken) {
-        return userRefreshService.execute(refreshToken);
     }
 
     @GetMapping("/profile")
