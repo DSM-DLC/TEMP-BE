@@ -32,12 +32,12 @@ public class UserLoginService {
         }
 
         String accessToken = jwtTokenProvider.createAccessToken(user.getUserId(), user.getRole());
+        String refreshToken = jwtTokenProvider.createRefreshToken(user.getUserId(), user.getRole());
 
         return TokenResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshRepository.save(
-                        new RefreshToken(jwtTokenProvider.createRefreshToken())).getToken())
-                .role(user.getRole())
+                        new RefreshToken(refreshToken)).getToken())
                 .build();
     }
 }
