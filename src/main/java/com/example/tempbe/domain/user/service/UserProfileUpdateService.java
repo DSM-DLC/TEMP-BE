@@ -20,8 +20,6 @@ public class UserProfileUpdateService {
 
         User user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
-        System.out.println(user.getUserId());
-        System.out.println(userId);
 
         user.updateUserProfile(
                 request.getUserId(),
