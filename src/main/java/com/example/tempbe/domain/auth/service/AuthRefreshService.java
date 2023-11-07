@@ -23,9 +23,6 @@ public class AuthRefreshService {
         RefreshToken token = refreshRepository.findByToken(refreshToken)
                 .orElseThrow(() -> NotFoundRefreshTokenException.EXCEPTION);
 
-        System.out.println(token.getId().toString());
-        System.out.println(token.getToken());
-
         return TokenResponse.builder()
                 .accessToken(jwtTokenProvider.createAccessToken(jwtTokenProvider.getId(token.getToken()), jwtTokenProvider.getRole(token.getToken())))
                 .refreshToken(refreshRepository.save(
