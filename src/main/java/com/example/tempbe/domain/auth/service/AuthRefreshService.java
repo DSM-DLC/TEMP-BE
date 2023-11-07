@@ -1,4 +1,4 @@
-package com.example.tempbe.domain.admin.service;
+package com.example.tempbe.domain.auth.service;
 
 import com.example.tempbe.domain.auth.controller.response.TokenResponse;
 import com.example.tempbe.domain.auth.domain.RefreshRepository;
@@ -12,21 +12,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class AdminRefreshService {
+public class AuthRefreshService {
     private final JwtTokenProvider jwtTokenProvider;
     private final RefreshRepository refreshRepository;
 
     @Transactional
     public TokenResponse execute(String refreshToken) {
-        if (!jwtTokenProvider.isRefreshToken(refreshToken)) throw NotRefreshTokenException.EXCEPTION;
+        if(!jwtTokenProvider.isRefreshToken(refreshToken)) throw NotRefreshTokenException.EXCEPTION;
 
         RefreshToken token = refreshRepository.findByToken(refreshToken)
                 .orElseThrow(() -> NotFoundRefreshTokenException.EXCEPTION);
 
+        System.out.println(token.getId().toString());
+        System.out.println(token.getToken());
+
         return TokenResponse.builder()
-                .accessToken(jwtTokenProvider.createAccessToken(token.getId().toString(), jwtTokenProvider.getRole(token.getToken())))
+                .accessToken(jwtTokenProvider.createAccessToken(jwtTokenProvider.getId(token.getToken()), jwtTokenProvider.getRole(token.getToken())))
                 .refreshToken(refreshRepository.save(
-                        token.update(jwtTokenProvider.createRefreshToken())).getToken())
+                        token.update(jwtTokenProvider.createRefreshToken(jwtTokenProvider.getId(token.getToken()), jwtTokenProvider.getRole(token.getToken())))).getToken())
                 .build();
     }
 }
