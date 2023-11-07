@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final ObjectMapper objectMapper;
+    private final RedisTemplate redisTemplate;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
@@ -40,12 +42,13 @@ public class SecurityConfig {
 
                 .antMatchers(HttpMethod.POST, "/user/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/admin/login").permitAll()
+                .antMatchers(HttpMethod.PUT, "/auth/refresh").permitAll()
                 .antMatchers(HttpMethod.POST, "/admin/issue").hasRole("admin")
 
 
                 .anyRequest().authenticated()
 
-                .and().apply(new FilterConfig(jwtTokenProvider, objectMapper))
+                .and().apply(new FilterConfig(jwtTokenProvider, redisTemplate, objectMapper))
                 .and().build();
 
     }
