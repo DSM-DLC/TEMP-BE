@@ -12,6 +12,10 @@ spring:
         show_sql: true
         format_sql: true
 
+  redis:
+    host: ${HOST}
+    port: ${PORT}
+
 jwt:
   secret: ${SECRET}
   access_exp: ${ACCESS_EXP}
