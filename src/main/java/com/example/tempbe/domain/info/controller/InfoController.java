@@ -8,10 +8,12 @@ import com.example.tempbe.domain.info.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -37,13 +39,20 @@ public class InfoController {
     }
 
     @GetMapping("/find")
-    public List<InfoFindResponse> find(@RequestBody @Valid InfoFindRequest request){
-        return infoFindService.execute(request);
+    public List<InfoFindResponse> find(
+            @RequestParam String name,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthDate
+    ){
+        return infoFindService.execute(name, birthDate);
     }
 
     @GetMapping("/detail")
-    public InfoDetailResponse find(@RequestBody @Valid InfoDetailRequest request){
-        return infoDetailService.execute(request);
+    public InfoDetailResponse detail(
+            @RequestParam String name,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthDate,
+            @RequestParam String address
+    ){
+        return infoDetailService.execute(name, birthDate, address);
     }
 
     @GetMapping("/list")
