@@ -1,12 +1,12 @@
 package com.example.tempbe.domain.info.service;
 
-import com.example.tempbe.domain.info.controller.request.InfoFindRequest;
 import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
 import com.example.tempbe.domain.info.domain.InfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,9 +16,9 @@ public class InfoFindService {
     private final InfoRepository infoRepository;
 
     @Transactional(readOnly = true)
-    public List<InfoFindResponse> execute(InfoFindRequest request){
-        if(request.getBirthDate() == null) {
-            List<InfoFindResponse> infoFindResponseList = infoRepository.findByName(request.getName())
+    public List<InfoFindResponse> execute(String name, Date birthDate){
+        if(birthDate == null) {
+            List<InfoFindResponse> infoFindResponseList = infoRepository.findByName(name)
                     .stream().map(info -> InfoFindResponse
                             .builder()
                             .name(info.getName())
@@ -30,7 +30,7 @@ public class InfoFindService {
             return infoFindResponseList;
         }
 
-        List<InfoFindResponse> infoFindResponseList = infoRepository.findByNameAndBirthDate(request.getName(),request.getBirthDate())
+        List<InfoFindResponse> infoFindResponseList = infoRepository.findByNameAndBirthDate(name, birthDate)
                 .stream().map(info -> InfoFindResponse
                         .builder()
                         .name(info.getName())
