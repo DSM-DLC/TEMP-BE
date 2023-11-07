@@ -9,6 +9,6 @@ public class NotMatchesPasswordException extends BaseException {
     public static final BaseException EXCEPTION = new NotMatchesPasswordException();
 
     private NotMatchesPasswordException() {
-        super(ErrorCode.USER_NOT_FOUND);
+        super(ErrorCode.NOT_MATCHES_PASSWORD);
     }
 }
