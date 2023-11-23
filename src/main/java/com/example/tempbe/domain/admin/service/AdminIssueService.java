@@ -27,7 +27,7 @@ public class AdminIssueService {
                 .contact(request.getContact())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .department(request.getDepartment())
-                .role(request.getRole())
+                .role("user")
                 .build());
     }
 }
