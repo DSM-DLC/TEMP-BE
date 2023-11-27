@@ -56,7 +56,7 @@ public class InfoController {
     }
 
     @GetMapping("/list")
-    public List<InfoPagingResponse> find(Pageable pageable){
+    public List<InfoPagingResponse> find(@PageableDefault Pageable pageable){
         return infoPagingService.findAll(pageable).getContent();
     }
 
