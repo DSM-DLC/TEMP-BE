@@ -1,17 +1,32 @@
 package com.example.tempbe.domain.info.controller;
 
-import com.example.tempbe.domain.info.controller.request.*;
+import com.example.tempbe.domain.info.controller.request.InfoDeleteRequest;
+import com.example.tempbe.domain.info.controller.request.InfoUpdateRequest;
+import com.example.tempbe.domain.info.controller.request.InfoUploadRequest;
 import com.example.tempbe.domain.info.controller.response.InfoDetailResponse;
 import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
 import com.example.tempbe.domain.info.controller.response.InfoPagingResponse;
-import com.example.tempbe.domain.info.service.*;
+import com.example.tempbe.domain.info.service.InfoDeleteService;
+import com.example.tempbe.domain.info.service.InfoDetailService;
+import com.example.tempbe.domain.info.service.InfoFindService;
+import com.example.tempbe.domain.info.service.InfoPagingService;
+import com.example.tempbe.domain.info.service.InfoUpdateService;
+import com.example.tempbe.domain.info.service.InfoUploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -57,7 +72,7 @@ public class InfoController {
     }
 
     @GetMapping("/list")
-    public Page<InfoPagingResponse> find(@PageableDefault Pageable pageable){
+    public Page<InfoPagingResponse> find(@PageableDefault(size = 10) Pageable pageable){
         return infoPagingService.findAll(pageable);
     }
 

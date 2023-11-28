@@ -31,8 +31,8 @@ public class UserLoginService {
             throw PasswordMisMatchException.EXCEPTION;
         }
 
-        String accessToken = jwtTokenProvider.createAccessToken(user.getUserId(), user.getRole());
-        String refreshToken = jwtTokenProvider.createRefreshToken(user.getUserId(), user.getRole());
+        String accessToken = jwtTokenProvider.createAccessToken(user.getUserId(), "user");
+        String refreshToken = jwtTokenProvider.createRefreshToken(user.getUserId(), "user");
 
         return TokenResponse.builder()
                 .accessToken(accessToken)

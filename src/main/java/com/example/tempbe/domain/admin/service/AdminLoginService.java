@@ -32,8 +32,8 @@ public class AdminLoginService {
             throw PasswordMisMatchException.EXCEPTION;
         }
 
-        String accessToken = jwtTokenProvider.createAccessToken(admin.getAdminId(), admin.getRole());
-        String refreshToken = jwtTokenProvider.createRefreshToken(admin.getAdminId(), admin.getRole());
+        String accessToken = jwtTokenProvider.createAccessToken(admin.getAdminId(), "admin");
+        String refreshToken = jwtTokenProvider.createRefreshToken(admin.getAdminId(), "admin");
 
         return TokenResponse.builder()
                 .accessToken(accessToken)

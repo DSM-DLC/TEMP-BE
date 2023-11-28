@@ -18,14 +18,10 @@ public class Admin extends BaseIdEntity{
     @Column(nullable = false, length = 300)
     private String password;
 
-    @Column(nullable = false, length = 10)
-    private String role;
-
     @Builder
-    public Admin(String adminId, String password, String role){
+    public Admin(String adminId, String password){
         this.adminId = adminId;
         this.password = password;
-        this.role = role;
     }
 
     public void AdminChangePassword(String password){

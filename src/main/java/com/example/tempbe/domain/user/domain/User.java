@@ -27,17 +27,13 @@ public class User extends BaseIdEntity {
     @Column(nullable = false, length = 20)
     private String contact;
 
-    @Column(nullable = false, length = 10)
-    private String role;
-
     @Builder
-    public User(String userId, String name, String password, String department, String contact, String role){
+    public User(String userId, String name, String password, String department, String contact){
         this.userId = userId;
         this.name = name;
         this.password = password;
         this.department = department;
         this.contact = contact;
-        this.role = role;
     }
 
 
