@@ -3,6 +3,7 @@ package com.example.tempbe.domain.user.service;
 import com.example.tempbe.domain.user.controller.request.UserProfileUpdateRequest;
 import com.example.tempbe.domain.user.domain.User;
 import com.example.tempbe.domain.user.domain.UserRepository;
+import com.example.tempbe.domain.user.exception.IsEmptyException;
 import com.example.tempbe.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +21,10 @@ public class UserProfileUpdateService {
 
         User user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+
+        if(user.getUserId().isEmpty() || user.getName().isEmpty() || user.getDepartment().isEmpty() || user.getContact().isEmpty()){
+            throw IsEmptyException.EXCEPTION;
+        }
 
         user.updateUserProfile(
                 request.getUserId(),

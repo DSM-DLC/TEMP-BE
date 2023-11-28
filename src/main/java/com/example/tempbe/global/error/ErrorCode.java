@@ -11,6 +11,7 @@ public enum ErrorCode {
     ISSUE_ALREADY_EXISTS(409, "이미 발급된 계정입니다."),
     INFO_NOT_FOUND(404,"인적사항을 찾을 수 없습니다."),
     INFO_ALREADY_EXISTS(409, "이미 존재하는 인적사항입니다."),
+    IS_EMPTY(400, "값이 비어있습니다."),
 
     EXPIRED_JWT(401, "토큰이 만료되었습니다."),
     INVALID_JWT(401, "토큰이 유효하지 않습니다."),
