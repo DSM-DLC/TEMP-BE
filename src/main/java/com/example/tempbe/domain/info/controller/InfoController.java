@@ -3,17 +3,15 @@ package com.example.tempbe.domain.info.controller;
 import com.example.tempbe.domain.info.controller.request.InfoDeleteRequest;
 import com.example.tempbe.domain.info.controller.request.InfoUpdateRequest;
 import com.example.tempbe.domain.info.controller.request.InfoUploadRequest;
-import com.example.tempbe.domain.info.controller.response.InfoDetailResponse;
-import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
-import com.example.tempbe.domain.info.controller.response.InfoPagingResponse;
+import com.example.tempbe.domain.info.controller.response.*;
 import com.example.tempbe.domain.info.service.InfoDeleteService;
 import com.example.tempbe.domain.info.service.InfoDetailService;
 import com.example.tempbe.domain.info.service.InfoFindService;
 import com.example.tempbe.domain.info.service.InfoPagingService;
 import com.example.tempbe.domain.info.service.InfoUpdateService;
 import com.example.tempbe.domain.info.service.InfoUploadService;
-import com.example.tempbe.domain.info.controller.response.PageResponse;
 import lombok.RequiredArgsConstructor;
+import org.mockito.internal.matchers.Find;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -56,11 +54,12 @@ public class InfoController {
     }
 
     @GetMapping("/find")
-    public List<InfoFindResponse> find(
+    public FindResponse find(
+            @PageableDefault(size = 10) Pageable pageable,
             @RequestParam String name,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthDate
     ){
-        return infoFindService.execute(name, birthDate);
+        return infoFindService.execute(pageable ,name, birthDate);
     }
 
     @GetMapping("/detail")
@@ -73,13 +72,8 @@ public class InfoController {
     }
 
     @GetMapping("/list")
-    public PageResponse find(@PageableDefault(size = 10) Pageable pageable){
-        Page<InfoPagingResponse> page = infoPagingService.findAll(pageable);
-
-        return PageResponse.builder()
-                .contents(page.getContent())
-                .count(page.getTotalElements())
-                .build();
+    public PageResponse list(@PageableDefault(size = 10) Pageable pageable){
+        return infoPagingService.findAll(pageable);
     }
 
     @DeleteMapping("/delete")

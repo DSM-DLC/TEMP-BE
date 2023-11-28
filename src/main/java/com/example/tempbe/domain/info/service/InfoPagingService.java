@@ -1,6 +1,7 @@
 package com.example.tempbe.domain.info.service;
 
 import com.example.tempbe.domain.info.controller.response.InfoPagingResponse;
+import com.example.tempbe.domain.info.controller.response.PageResponse;
 import com.example.tempbe.domain.info.domain.InfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,8 +16,13 @@ public class InfoPagingService {
     private final InfoRepository infoRepository;
 
     @Transactional(readOnly = true)
-    public Page<InfoPagingResponse> findAll(Pageable pageable){
-        return infoRepository.findAll(pageable)
+    public PageResponse findAll(Pageable pageable){
+        Page<InfoPagingResponse> page = infoRepository.findAll(pageable)
                 .map(InfoPagingResponse::from);
+
+        return PageResponse.builder()
+                .contents(page.getContent())
+                .count(page.getTotalElements())
+                .build();
     }
 }

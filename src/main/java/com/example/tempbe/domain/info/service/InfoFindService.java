@@ -1,8 +1,11 @@
 package com.example.tempbe.domain.info.service;
 
+import com.example.tempbe.domain.info.controller.response.FindResponse;
 import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
 import com.example.tempbe.domain.info.domain.InfoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,29 +19,23 @@ public class InfoFindService {
     private final InfoRepository infoRepository;
 
     @Transactional(readOnly = true)
-    public List<InfoFindResponse> execute(String name, Date birthDate){
+    public FindResponse execute(Pageable pageable, String name, Date birthDate){
         if(birthDate == null) {
-            List<InfoFindResponse> infoFindResponseList = infoRepository.findByName(name)
-                    .stream().map(info -> InfoFindResponse
-                            .builder()
-                            .name(info.getName())
-                            .birthDate(info.getBirthDate())
-                            .address(info.getAddress())
-                            .build())
-                    .collect(Collectors.toList());
+            Page<InfoFindResponse> page = infoRepository.findByName(pageable, name)
+                    .map(InfoFindResponse::from);
 
-            return infoFindResponseList;
+            return FindResponse.builder()
+                    .contents(page.getContent())
+                    .count(page.getTotalElements())
+                    .build();
         }
 
-        List<InfoFindResponse> infoFindResponseList = infoRepository.findByNameAndBirthDate(name, birthDate)
-                .stream().map(info -> InfoFindResponse
-                        .builder()
-                        .name(info.getName())
-                        .birthDate(info.getBirthDate())
-                        .address(info.getAddress())
-                        .build())
-                .collect(Collectors.toList());
+        Page<InfoFindResponse> page = infoRepository.findByNameAndBirthDate(pageable, name, birthDate)
+                .map(InfoFindResponse::from);
 
-        return infoFindResponseList;
+        return FindResponse.builder()
+                .contents(page.getContent())
+                .count(page.getTotalElements())
+                .build();
     }
 }
