@@ -1,9 +1,9 @@
 package com.example.tempbe.domain.admin.service;
 
 import com.example.tempbe.domain.admin.controller.request.IssueRequest;
+import com.example.tempbe.domain.admin.exception.IssueAlreadyExistsException;
 import com.example.tempbe.domain.user.domain.User;
 import com.example.tempbe.domain.user.domain.UserRepository;
-import com.example.tempbe.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class AdminIssueService {
     @Transactional
     public void execute(IssueRequest request) {
         if (userRepository.findByUserId(request.getUserId()).isPresent()) {
-            throw UserNotFoundException.EXCEPTION;
+            throw IssueAlreadyExistsException.EXCEPTION;
         }
 
         userRepository.save(User.builder()

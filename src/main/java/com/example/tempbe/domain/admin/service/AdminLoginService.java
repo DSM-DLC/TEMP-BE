@@ -7,7 +7,7 @@ import com.example.tempbe.domain.admin.exception.AdminNotFoundException;
 import com.example.tempbe.domain.auth.controller.response.TokenResponse;
 import com.example.tempbe.domain.auth.domain.RefreshRepository;
 import com.example.tempbe.domain.auth.domain.RefreshToken;
-import com.example.tempbe.domain.auth.exception.NotMatchesPasswordException;
+import com.example.tempbe.domain.auth.exception.PasswordMisMatchException;
 import com.example.tempbe.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +29,7 @@ public class AdminLoginService {
                 .orElseThrow(() -> AdminNotFoundException.EXCEPTION);
 
         if(!passwordEncoder.matches(request.getPassword(), admin.getPassword())){
-            throw NotMatchesPasswordException.EXCEPTION;
+            throw PasswordMisMatchException.EXCEPTION;
         }
 
         String accessToken = jwtTokenProvider.createAccessToken(admin.getAdminId(), admin.getRole());

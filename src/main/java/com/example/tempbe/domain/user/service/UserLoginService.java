@@ -3,7 +3,7 @@ package com.example.tempbe.domain.user.service;
 import com.example.tempbe.domain.auth.controller.response.TokenResponse;
 import com.example.tempbe.domain.auth.domain.RefreshRepository;
 import com.example.tempbe.domain.auth.domain.RefreshToken;
-import com.example.tempbe.domain.auth.exception.NotMatchesPasswordException;
+import com.example.tempbe.domain.auth.exception.PasswordMisMatchException;
 import com.example.tempbe.domain.user.controller.request.UserLoginRequest;
 import com.example.tempbe.domain.user.domain.User;
 import com.example.tempbe.domain.user.domain.UserRepository;
@@ -28,7 +28,7 @@ public class UserLoginService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())){
-            throw NotMatchesPasswordException.EXCEPTION;
+            throw PasswordMisMatchException.EXCEPTION;
         }
 
         String accessToken = jwtTokenProvider.createAccessToken(user.getUserId(), user.getRole());

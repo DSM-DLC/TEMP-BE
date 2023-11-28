@@ -4,8 +4,8 @@ import com.example.tempbe.domain.admin.controller.request.AdminChangePasswordReq
 import com.example.tempbe.domain.admin.domain.Admin;
 import com.example.tempbe.domain.admin.domain.AdminRepository;
 import com.example.tempbe.domain.admin.exception.AdminNotFoundException;
-import com.example.tempbe.domain.auth.exception.NotMatchesNewPasswordException;
-import com.example.tempbe.domain.auth.exception.NotMatchesPasswordException;
+import com.example.tempbe.domain.auth.exception.NewPasswordMisMatchException;
+import com.example.tempbe.domain.auth.exception.PasswordMisMatchException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,11 +26,11 @@ public class AdminChangePasswordService {
                 .orElseThrow(() -> AdminNotFoundException.EXCEPTION);
 
         if(!passwordEncoder.matches(request.getPassword(), admin.getPassword())) {
-            throw NotMatchesPasswordException.EXCEPTION;
+            throw PasswordMisMatchException.EXCEPTION;
         }
 
         if(!request.getNewPassword().equals(request.getNewPasswordCheck())){
-            throw NotMatchesNewPasswordException.EXCEPTION;
+            throw NewPasswordMisMatchException.EXCEPTION;
         }
 
         admin.AdminChangePassword(passwordEncoder.encode(request.getNewPassword()));
