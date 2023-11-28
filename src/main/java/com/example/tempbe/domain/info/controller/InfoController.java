@@ -6,6 +6,7 @@ import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
 import com.example.tempbe.domain.info.controller.response.InfoPagingResponse;
 import com.example.tempbe.domain.info.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,8 +57,8 @@ public class InfoController {
     }
 
     @GetMapping("/list")
-    public List<InfoPagingResponse> find(@PageableDefault Pageable pageable){
-        return infoPagingService.findAll(pageable).getContent();
+    public Page<InfoPagingResponse> find(@PageableDefault Pageable pageable){
+        return infoPagingService.findAll(pageable);
     }
 
     @DeleteMapping("/delete")
