@@ -7,12 +7,9 @@ import com.example.tempbe.domain.info.controller.response.*;
 import com.example.tempbe.domain.info.service.InfoDeleteService;
 import com.example.tempbe.domain.info.service.InfoDetailService;
 import com.example.tempbe.domain.info.service.InfoFindService;
-import com.example.tempbe.domain.info.service.InfoPagingService;
 import com.example.tempbe.domain.info.service.InfoUpdateService;
 import com.example.tempbe.domain.info.service.InfoUploadService;
 import lombok.RequiredArgsConstructor;
-import org.mockito.internal.matchers.Find;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Date;
-import java.util.List;
 
 @RestController
 @RequestMapping("/info")
@@ -39,7 +35,6 @@ public class InfoController {
     private final InfoUpdateService infoUpdateService;
     private final InfoFindService infoFindService;
     private final InfoDetailService infoDetailService;
-    private final InfoPagingService infoPagingService;
     private final InfoDeleteService infoDeleteService;
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -69,11 +64,6 @@ public class InfoController {
             @RequestParam String address
     ){
         return infoDetailService.execute(name, birthDate, address);
-    }
-
-    @GetMapping("/list")
-    public PageResponse list(@PageableDefault(size = 10) Pageable pageable){
-        return infoPagingService.findAll(pageable);
     }
 
     @DeleteMapping("/delete")

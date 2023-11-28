@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -20,8 +18,17 @@ public class InfoFindService {
 
     @Transactional(readOnly = true)
     public FindResponse execute(Pageable pageable, String name, Date birthDate){
-        if(birthDate == null) {
-            Page<InfoFindResponse> page = infoRepository.findByName(pageable, name)
+        if(name.isEmpty()){
+            Page<InfoFindResponse> page = infoRepository.findAll(pageable)
+                    .map(InfoFindResponse::from);
+
+            return FindResponse.builder()
+                    .contents(page.getContent())
+                    .count(page.getTotalElements())
+                    .build();
+        }
+        else if(birthDate == null) {
+            Page<InfoFindResponse> page = infoRepository.findByNameContaining(pageable, name)
                     .map(InfoFindResponse::from);
 
             return FindResponse.builder()
@@ -30,7 +37,7 @@ public class InfoFindService {
                     .build();
         }
 
-        Page<InfoFindResponse> page = infoRepository.findByNameAndBirthDate(pageable, name, birthDate)
+        Page<InfoFindResponse> page = infoRepository.findByNameContainingAndBirthDate(pageable, name, birthDate)
                 .map(InfoFindResponse::from);
 
         return FindResponse.builder()
