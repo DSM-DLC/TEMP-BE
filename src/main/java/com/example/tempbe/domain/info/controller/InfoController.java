@@ -6,17 +6,13 @@ import com.example.tempbe.domain.info.controller.request.InfoUploadRequest;
 import com.example.tempbe.domain.info.controller.response.InfoDetailResponse;
 import com.example.tempbe.domain.info.controller.response.InfoFindResponse;
 import com.example.tempbe.domain.info.controller.response.InfoPagingResponse;
-<<<<<<< Updated upstream
 import com.example.tempbe.domain.info.service.InfoDeleteService;
 import com.example.tempbe.domain.info.service.InfoDetailService;
 import com.example.tempbe.domain.info.service.InfoFindService;
 import com.example.tempbe.domain.info.service.InfoPagingService;
 import com.example.tempbe.domain.info.service.InfoUpdateService;
 import com.example.tempbe.domain.info.service.InfoUploadService;
-=======
 import com.example.tempbe.domain.info.controller.response.PageResponse;
-import com.example.tempbe.domain.info.service.*;
->>>>>>> Stashed changes
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -76,7 +72,7 @@ public class InfoController {
         return infoDetailService.execute(name, birthDate, address);
     }
 
-    @GetMapping("/list")    
+    @GetMapping("/list")
     public PageResponse find(@PageableDefault(size = 10) Pageable pageable){
         Page<InfoPagingResponse> page = infoPagingService.findAll(pageable);
 
