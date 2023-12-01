@@ -22,10 +22,10 @@ public class UserProfileUpdateService {
         User user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
-        if(user.getUserId().isEmpty() && user.getName().isEmpty() && user.getDepartment().isEmpty() && user.getContact().isEmpty()){
+        if(request.getUserId().isEmpty() || request.getName().isEmpty() || request.getDepartment().isEmpty() || request.getContact().isEmpty()){
             throw IsEmptyException.EXCEPTION;
         }
-
+        
         user.updateUserProfile(
                 request.getUserId(),
                 request.getName(),
