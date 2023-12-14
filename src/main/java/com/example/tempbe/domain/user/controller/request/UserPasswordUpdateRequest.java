@@ -10,4 +10,10 @@ import javax.validation.constraints.NotNull;
 public class UserPasswordUpdateRequest {
     @NotNull
     private String password;
+
+    @NotNull
+    private String newPassword;
+
+    @NotNull
+    private String newPasswordCheck;
 }
