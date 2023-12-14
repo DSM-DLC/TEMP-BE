@@ -2,9 +2,11 @@ package com.example.tempbe.domain.user.controller;
 
 import com.example.tempbe.domain.auth.controller.response.TokenResponse;
 import com.example.tempbe.domain.user.controller.request.UserLoginRequest;
+import com.example.tempbe.domain.user.controller.request.UserPasswordUpdateRequest;
 import com.example.tempbe.domain.user.controller.request.UserProfileUpdateRequest;
 import com.example.tempbe.domain.user.controller.response.UserProfileResponse;
 import com.example.tempbe.domain.user.service.UserLoginService;
+import com.example.tempbe.domain.user.service.UserPasswordUpdateService;
 import com.example.tempbe.domain.user.service.UserProfileService;
 import com.example.tempbe.domain.user.service.UserProfileUpdateService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ public class UserController {
     private final UserLoginService userLoginService;
     private final UserProfileService userProfileService;
     private final UserProfileUpdateService userProfileUpdateService;
+    private final UserPasswordUpdateService userPasswordUpdateService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/login")
@@ -41,5 +44,10 @@ public class UserController {
     @PatchMapping("/profile/update")
     public void profileUpdate(@RequestBody @Valid UserProfileUpdateRequest request){
         userProfileUpdateService.execute(request);
+    }
+
+    @PatchMapping("/password")
+    public void passwordUpdate(@RequestBody @Valid UserPasswordUpdateRequest request) {
+        userPasswordUpdateService.execute(request);
     }
 }
