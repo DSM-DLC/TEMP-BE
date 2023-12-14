@@ -21,10 +21,6 @@ public class UserProfileUpdateService {
 
         User user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
-
-        if(request.getUserId().isEmpty() || request.getName().isEmpty() || request.getDepartment().isEmpty() || request.getContact().isEmpty()){
-            throw IsEmptyException.EXCEPTION;
-        }
         
         user.updateUserProfile(
                 request.getUserId(),

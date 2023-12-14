@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -15,15 +16,18 @@ import java.util.Date;
 @Entity
 public class Info extends BaseIdEntity {
     @Column(nullable = false, length = 20)
+    @NotBlank
     private String name;
 
     @Column(nullable = false, length = 30)
     private Date birthDate;
 
     @Column(nullable = false, length = 30)
+    @NotBlank
     private String address;
 
     @Column(nullable = false, length = 200)
+    @NotBlank
     private String budgetBasis;
 
     @NotNull
@@ -36,18 +40,23 @@ public class Info extends BaseIdEntity {
     private Boolean fourInsurance;
 
     @Column(nullable = false, length = 20)
+    @NotBlank
     private String jobType;
 
     @Column(nullable = false, length = 50)
+    @NotBlank
     private String period;
 
     @Column(nullable = false, length = 20)
+    @NotBlank
     private String issuanceDepartment;
 
     @Column(nullable = false, length = 20)
+    @NotBlank
     private String picName;
 
     @Column(nullable = false, length = 20)
+    @NotBlank
     private String picContact;
 
     @Builder

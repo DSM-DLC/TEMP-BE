@@ -3,17 +3,18 @@ package com.example.tempbe.domain.admin.controller.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @Getter
 public class AdminChangePasswordRequest {
-    @NotNull
+    @NotBlank
     private String password;
 
-    @NotNull
+    @NotBlank
     private String newPassword;
 
-    @NotNull
+    @NotBlank
     private String newPasswordCheck;
 }
