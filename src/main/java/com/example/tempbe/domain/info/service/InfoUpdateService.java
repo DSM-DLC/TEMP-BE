@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Service
 public class InfoUpdateService {
@@ -29,7 +31,8 @@ public class InfoUpdateService {
                 request.getPeriod(),
                 request.getIssuanceDepartment(),
                 request.getPicName(),
-                request.getPicContact());
+                request.getPicContact(),
+                LocalDateTime.now());
 
         infoRepository.save(info);
     }

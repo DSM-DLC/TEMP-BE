@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -59,9 +60,12 @@ public class Info extends BaseIdEntity {
     @NotBlank
     private String picContact;
 
+    @NotNull
+    private LocalDateTime uploadTime;
+
     @Builder
     public Info(String name, Date birthDate, String address, String budgetBasis, Long cost, Long workHour, Boolean fourInsurance,
-                String jobType, String period, String issuanceDepartment, String picName, String picContact){
+                String jobType, String period, String issuanceDepartment, String picName, String picContact, LocalDateTime uploadTime){
         this.name = name;
         this.birthDate = birthDate;
         this.address = address;
@@ -74,10 +78,11 @@ public class Info extends BaseIdEntity {
         this.issuanceDepartment = issuanceDepartment;
         this.picName = picName;
         this.picContact = picContact;
+        this.uploadTime = uploadTime;
     }
 
     public void updateInfo(String name, Date birthDate, String address, String budgetBasis, Long cost, Long workHour, Boolean fourInsurance,
-                           String jobType, String period, String issuanceDepartment, String picName, String picContact){
+                           String jobType, String period, String issuanceDepartment, String picName, String picContact, LocalDateTime uploadTime){
         this.name = name;
         this.birthDate = birthDate;
         this.address = address;
@@ -90,5 +95,6 @@ public class Info extends BaseIdEntity {
         this.issuanceDepartment = issuanceDepartment;
         this.picName = picName;
         this.picContact = picContact;
+        this.uploadTime = uploadTime;
     }
 }
