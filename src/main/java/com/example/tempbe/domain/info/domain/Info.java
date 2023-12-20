@@ -31,16 +31,14 @@ public class Info extends BaseIdEntity {
     @NotBlank
     private String budgetBasis;
 
-    @NotNull
     private Long cost;
 
     @NotNull
     private Long workHour;
 
-    @NotNull
     private Boolean fourInsurance;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 50)
     @NotBlank
     private String jobType;
 

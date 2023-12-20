@@ -26,16 +26,14 @@ public class InfoUpdateRequest {
     @NotBlank(message = "예산근거를 입력해주세요")
     private String budgetBasis;
 
-    @NotNull(message = "총인권비를 입력해주세요")
     private Long cost;
 
     @NotNull(message = "근로시간을 입력해주세요")
     private Long workHour;
 
-    @NotNull
     private Boolean fourInsurance;
 
-    @NotBlank(message = "직종을 입력해주세요")
+    @NotBlank(message = "비고를 입력해주세요")
     private String jobType;
 
     @NotBlank(message = "재직기간을 입력해주세요")
