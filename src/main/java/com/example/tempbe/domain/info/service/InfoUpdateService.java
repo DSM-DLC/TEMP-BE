@@ -21,7 +21,7 @@ public class InfoUpdateService {
                 .orElseThrow(()-> InfoNotFoundException.EXCEPTION);
 
         info.updateInfo(request.getName(),
-                request.getBirthDate(),
+                request.getBirthDate() + "******",
                 request.getAddress(),
                 request.getBudgetBasis(),
                 request.getCost(),

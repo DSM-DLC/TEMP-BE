@@ -5,12 +5,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -21,7 +21,7 @@ public class Info extends BaseIdEntity {
     private String name;
 
     @Column(nullable = false, length = 30)
-    private Date birthDate;
+    private String birthDate;
 
     @Column(nullable = false, length = 30)
     @NotBlank
@@ -62,7 +62,7 @@ public class Info extends BaseIdEntity {
     private LocalDateTime uploadTime;
 
     @Builder
-    public Info(String name, Date birthDate, String address, String budgetBasis, Long cost, Long workHour, Boolean fourInsurance,
+    public Info(String name, String birthDate, String address, String budgetBasis, Long cost, Long workHour, Boolean fourInsurance,
                 String jobType, String period, String issuanceDepartment, String picName, String picContact, LocalDateTime uploadTime){
         this.name = name;
         this.birthDate = birthDate;
@@ -79,7 +79,7 @@ public class Info extends BaseIdEntity {
         this.uploadTime = uploadTime;
     }
 
-    public void updateInfo(String name, Date birthDate, String address, String budgetBasis, Long cost, Long workHour, Boolean fourInsurance,
+    public void updateInfo(String name, String birthDate, String address, String budgetBasis, Long cost, Long workHour, Boolean fourInsurance,
                            String jobType, String period, String issuanceDepartment, String picName, String picContact, LocalDateTime uploadTime){
         this.name = name;
         this.birthDate = birthDate;

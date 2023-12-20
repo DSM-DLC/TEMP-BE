@@ -60,7 +60,7 @@ public class InfoController {
     @GetMapping("/detail")
     public InfoDetailResponse detail(
             @RequestParam String name,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthDate,
+            @RequestParam String birthDate,
             @RequestParam String address
     ){
         return infoDetailService.execute(name, birthDate, address);

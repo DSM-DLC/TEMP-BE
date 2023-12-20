@@ -8,15 +8,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-
 @RequiredArgsConstructor
 @Service
 public class InfoDetailService {
     private final InfoRepository infoRepository;
 
     @Transactional(readOnly = true)
-    public InfoDetailResponse execute(String name, Date birthDate, String address){
+    public InfoDetailResponse execute(String name, String birthDate, String address){
         Info info = infoRepository.findByNameAndBirthDateAndAddress(name, birthDate, address)
                 .orElseThrow(()-> InfoNotFoundException.EXCEPTION);
 

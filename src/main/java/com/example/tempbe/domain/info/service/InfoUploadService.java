@@ -18,13 +18,13 @@ public class InfoUploadService {
 
     @Transactional
     public void execute(InfoUploadRequest request){
-        if(infoRepository.findByNameAndBirthDateAndAddress(request.getName(), request.getBirthDate(), request.getAddress()).isPresent()){
+        if(infoRepository.findByNameAndBirthDateAndAddress(request.getName(), request.getBirthDate() + "******", request.getAddress()).isPresent()){
             throw InfoAlreadyExistsException.EXCEPTION;
         }
 
         infoRepository.save(Info.builder()
                 .name(request.getName())
-                .birthDate(request.getBirthDate())
+                .birthDate(request.getBirthDate() + "******")
                 .address(request.getAddress())
                 .budgetBasis(request.getBudgetBasis())
                 .cost(request.getCost())

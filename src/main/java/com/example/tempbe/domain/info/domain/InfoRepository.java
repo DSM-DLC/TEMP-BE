@@ -13,6 +13,6 @@ import java.util.UUID;
 public interface InfoRepository extends JpaRepository<Info, UUID> {
     Page<Info> findByNameContaining(Pageable pageable,String name);
     Page<Info> findByNameContainingAndBirthDate(Pageable pageable, String name, Date birthDate);
-    Optional<Info> findByNameAndBirthDateAndAddress(String name, Date birthDate, String address);
+    Optional<Info> findByNameAndBirthDateAndAddress(String name, String birthDate, String address);
     Page<Info> findAll(Pageable pageable);
 }
