@@ -35,7 +35,7 @@ public class InfoFindService {
                     .build();
         }
 
-        Page<InfoFindResponse> page = infoRepository.findByNameContainingAndBirthDate(pageable, name, birthDate)
+        Page<InfoFindResponse> page = infoRepository.findByNameContainingAndBirthDate(pageable, name, birthDate + "******")
                 .map(InfoFindResponse::from);
 
         return FindResponse.builder()
