@@ -25,7 +25,7 @@ public class InfoFindService {
                     .count(page.getTotalElements())
                     .build();
         }
-        else if(birthDate == null) {
+        else if(birthDate.isEmpty()) {
             Page<InfoFindResponse> page = infoRepository.findByNameContaining(pageable, name)
                     .map(InfoFindResponse::from);
 
