@@ -52,7 +52,7 @@ public class InfoController {
     public FindResponse find(
             @PageableDefault(size = 10) Pageable pageable,
             @RequestParam String name,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date birthDate
+            @RequestParam(required = false) String birthDate
     ){
         return infoFindService.execute(pageable ,name, birthDate);
     }

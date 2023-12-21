@@ -9,15 +9,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-
 @RequiredArgsConstructor
 @Service
 public class InfoFindService {
     private final InfoRepository infoRepository;
 
     @Transactional(readOnly = true)
-    public FindResponse execute(Pageable pageable, String name, Date birthDate){
+    public FindResponse execute(Pageable pageable, String name, String birthDate){
         if(name.isEmpty()){
             Page<InfoFindResponse> page = infoRepository.findAll(pageable)
                     .map(InfoFindResponse::from);
